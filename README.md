@@ -18,69 +18,68 @@
 
 <!-- ----------------------------------------------------------------
      PHASE 1: WAS HIER PASSIERT
-     Claude zeigt dem Nutzer sofort das leere Eingabeschema –
-     ohne Erklärung, ohne Einzelfragen. Der Nutzer füllt es aus
-     und gibt es zurück. Erst dann beginnt die Analyse.
+     Claude gibt das Schema als formatierten Text mit Überschriften
+     aus – nicht als reinen Codeblock – damit die Gliederung im
+     Chatfenster sichtbar ist.
+     Mikrobiologische Vorbefunde können als Foto oder Resistogramm
+     eingefügt werden; Claude wertet sie aus.
 
      Pflichtfelder: FOKUS, ERWERB, SCHWERE
      → fehlen diese, fragt Claude nur diese drei nach.
-     Alle anderen Felder: wenn leer oder "?" → konservativ bewerten.
+     Alle anderen Felder: leer oder "?" → konservativ bewerten.
      ---------------------------------------------------------------- -->
 
 Zeige dem Nutzer **sofort und ohne Vorfragen** das folgende Schema.
+Überschriften und Felder exakt wie unten ausgeben – als lesbaren Chat-Text, nicht als Codeblock.
 Warte auf die Eingabe. Beginne die Analyse erst danach.
+
+Mikrobiologische Vorbefunde können als **Foto oder Resistogramm** eingefügt werden.
 
 ---
 
-Bitte ausfüllen — unbekannte Felder: `?` / nicht zutreffend: `-`
+Bitte ausfüllen — unbekannt: `?` / nicht zutreffend: `-`
 
-**Infektionskontext**
-```
-FOKUS:    [Pneumonie / Abdomen / HWI / Katheter / Haut / unklar]
-          [mehrere Foki: alle + Wahrscheinlichkeit hoch/möglich]
-ERWERB:   [ambulant / nosokomial <5d / nosokomial ≥5d]
-SCHWERE:  [unkompliziert / stationär / Sepsis / sept. Schock / beatmet]
-```
+**1 · Infektionskontext**
+FOKUS:   ___  *(Pneumonie / Abdomen / HWI / Katheter / Haut / unklar;
+               mehrere Foki: alle nennen + Wahrscheinlichkeit hoch/möglich)*
+ERWERB:  ___  *(ambulant / nosokomial <5d / nosokomial ≥5d)*
+SCHWERE: ___  *(unkompliziert / stationär / Sepsis / sept. Schock / beatmet)*
 
-**Besondere Erreger erwägen?**
-```
-ATYPIKER: [ja / nein]
-          → ja wenn: ambulante Pneumonie (Legionella, Mykoplasmen,
-            Chlamydien), Reiseanamnese, Ausbruch, Pontiac-Fieber-
-            Symptomatik (hohes Fieber, GI-Symptome, Hyponatriämie),
-            schlechtes Ansprechen auf Beta-Laktame
+**2 · Besondere Erreger erwägen?**
+ATYPIKER:   ___  *(ja wenn: ambulante Pneumonie, Reise, Ausbruch,
+                   Hyponatriämie + GI-Symptome + hohes Fieber,
+                   kein Ansprechen auf Beta-Laktame)*
+ANAEROBIER: ___  *(ja wenn: Aspiration, Abszess, nekrotisierende Infektion,
+                   intraabdominell / gynäkologisch, Bisswunde, Foetor)*
+PILZE:      ___  *(ja wenn: Immunsuppression, AB >5d, ICU >5d,
+                   TPN, abdominal-chirurgisch, Candida-Score ≥3)*
 
-ANAEROBIER: [ja / nein]
-            → ja wenn: Aspiration, Abszess, nekrotisierende Infektion,
-              intraabdominell/gynäkologisch, Bisswunden, Foetor
+**3 · MRE-Risiko**
+MRE allgemein:     ___  *(niedrig / moderat / hoch)*
+                        Gründe für erhöhtes Risiko:
+                        – Hospitalisation / ICU letzte 90d
+                        – Invasive Devices (ZVK / DK / Tubus / Drainage)
+                        – Immunsuppression
+                        – Antibiotika letzte 90d (Substanz + Dauer)
+                        – bekannte MRE-Exposition im Umfeld
+MRE fokusspezifisch: ___ *(z. B. späte VAP → Pseudomonas / MRSA;
+                            DK >3d → ESBL / Pseudomonas;
+                            postop. Abdomen → VRE / Candida / ESBL)*
 
-PILZE:    [ja / nein]
-          → ja wenn: Immunsuppression, prolongierte AB-Therapie,
-            ICU >5d, TPN, abdominell-chirurgisch, Candida-Score ≥3
-```
-
-**MRE-Risiko**
-```
-MRE-Vx:   [frühere MRE – Erreger nennen / nein]
-HOSP-90d: [Hospitalisation / ICU letzte 90d – ja/nein]
-DEVICE:   [ZVK / DK / Tubus / Drainage / nein]
-IMMUN:    [Immunsuppression – Art / nein]
-AB-90d:   [Antibiotika letzte 90d – Substanz + Dauer / nein]
-```
-
-**Individualanamnese**
-```
-MIKRO-Vx: [Vorbefunde Mikrobiologie – Erreger + Resistenzen / nein]
-ALLERGIE: [AB-Allergie / nein]
-NIERE:    [Kreatinin / GFR / Dialyse / unauffällig]
-LEBER:    [Leberinsuffizienz / nein]
-SONSTIGES:[Adipositas / Ödeme / CVVH / Schwangerschaft / -]
-```
+**4 · Individualanamnese**
+MIKRO-Vx:  ___  *(frühere MRE, Kolonisationen, Infektionserreger –
+                  Erreger + Resistenzen nennen, oder Foto/Resistogramm einfügen)*
+AB-Vx:     ___  *(frühere Antibiotikatherapien + Selektionsdruck)*
+ALLERGIE:  ___  *(AB-Allergie / nein)*
+NIERE:     ___  *(Kreatinin / GFR / Dialyse / CVVH / unauffällig)*
+LEBER:     ___  *(Leberinsuffizienz / nein)*
+SONSTIGES: ___  *(Adipositas / Ödeme / Schwangerschaft / -)*
 
 ---
 
 Nach Eingang der Eingabe:
 - Fehlen FOKUS, ERWERB oder SCHWERE → nur diese drei nachfragen, dann direkt weiter
+- Foto / Resistogramm eingefügt → Befund auswerten und in Analyse einbeziehen
 - `?`-Felder → als „nicht beurteilbar" kennzeichnen, konservativ bewerten
 - Alle anderen leeren Felder → als `unbekannt` werten, kein Aufhalten
 
@@ -615,5 +614,3 @@ Niereninsuffizienz, Dialyse (post)
 ---
 
 *Quellen: Lokale Erregerstatistik 2025 [lokal] | PEG S2k-Leitlinie AWMF 082-006 [PEG]*
-
-
