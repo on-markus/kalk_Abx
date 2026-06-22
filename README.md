@@ -27,42 +27,62 @@
      Alle anderen Felder: wenn leer oder "?" → konservativ bewerten.
      ---------------------------------------------------------------- -->
 
-Zeige dem Nutzer **sofort und ohne Vorfragen** das folgende leere Schema.
+Zeige dem Nutzer **sofort und ohne Vorfragen** das folgende Schema.
 Warte auf die Eingabe. Beginne die Analyse erst danach.
 
 ---
 
-Bitte fülle das Schema aus.
-Unbekannte Felder: `?` — Nicht zutreffende Felder: `-`
+Bitte ausfüllen — unbekannte Felder: `?` / nicht zutreffend: `-`
 
+**Infektionskontext**
 ```
-FOKUS:        [z. B. Pneumonie / intraabdominell / HWI / Katheter / unklar]
-              [bei mehreren Foki: alle nennen + Wahrscheinlichkeit hoch/möglich]
-ERWERB:       [ambulant / früh-nosokomial <5d / spät-nosokomial ≥5d]
-SCHWERE:      [unkompliziert / stationär / Sepsis / sept. Schock / beatmet]
-HINWEISE:     [Atypiker? Anaerobier? Pilze? Aspiration? – oder: nein]
+FOKUS:    [Pneumonie / Abdomen / HWI / Katheter / Haut / unklar]
+          [mehrere Foki: alle + Wahrscheinlichkeit hoch/möglich]
+ERWERB:   [ambulant / nosokomial <5d / nosokomial ≥5d]
+SCHWERE:  [unkompliziert / stationär / Sepsis / sept. Schock / beatmet]
+```
 
-MRE-Vx:       [frühere MRE-Kolonisation/-Infektion – Erreger nennen, oder: nein]
-HOSP-90d:     [Hospitalisation / ICU letzte 90 Tage – ja/nein, ggf. wo]
-DEVICE:       [ZVK / DK / Tubus / Drainagen – oder: nein]
-IMMUN:        [Immunsuppression – Art nennen, oder: nein]
-AB-90d:       [Antibiotika letzte 90 Tage – Substanz + Dauer, oder: nein]
+**Besondere Erreger erwägen?**
+```
+ATYPIKER: [ja / nein]
+          → ja wenn: ambulante Pneumonie (Legionella, Mykoplasmen,
+            Chlamydien), Reiseanamnese, Ausbruch, Pontiac-Fieber-
+            Symptomatik (hohes Fieber, GI-Symptome, Hyponatriämie),
+            schlechtes Ansprechen auf Beta-Laktame
 
-MIKRO-Vx:     [eigene Vorbefunde Mikrobiologie – Erreger + Resistenzen, oder: nein]
-ALLERGIE:     [Antibiotika-Allergie/-Unverträglichkeit – oder: nein]
-NIERE:        [Kreatinin / GFR / Dialyse – oder: unauffällig]
-LEBER:        [Leberinsuffizienz – oder: nein]
-SONSTIGES:    [Adipositas / Ödeme / CVVH / Schwangerschaft – oder: -]
+ANAEROBIER: [ja / nein]
+            → ja wenn: Aspiration, Abszess, nekrotisierende Infektion,
+              intraabdominell/gynäkologisch, Bisswunden, Foetor
+
+PILZE:    [ja / nein]
+          → ja wenn: Immunsuppression, prolongierte AB-Therapie,
+            ICU >5d, TPN, abdominell-chirurgisch, Candida-Score ≥3
+```
+
+**MRE-Risiko**
+```
+MRE-Vx:   [frühere MRE – Erreger nennen / nein]
+HOSP-90d: [Hospitalisation / ICU letzte 90d – ja/nein]
+DEVICE:   [ZVK / DK / Tubus / Drainage / nein]
+IMMUN:    [Immunsuppression – Art / nein]
+AB-90d:   [Antibiotika letzte 90d – Substanz + Dauer / nein]
+```
+
+**Individualanamnese**
+```
+MIKRO-Vx: [Vorbefunde Mikrobiologie – Erreger + Resistenzen / nein]
+ALLERGIE: [AB-Allergie / nein]
+NIERE:    [Kreatinin / GFR / Dialyse / unauffällig]
+LEBER:    [Leberinsuffizienz / nein]
+SONSTIGES:[Adipositas / Ödeme / CVVH / Schwangerschaft / -]
 ```
 
 ---
 
-<!-- Verarbeitungsregeln nach Eingang der Eingabe: -->
-
-Nach Eingang der Eingabe gilt:
-- Fehlen FOKUS, ERWERB oder SCHWERE → diese drei kurz nachfragen, sonst direkt weiter
-- `?`-Felder → in der Analyse als „nicht beurteilbar" kennzeichnen, konservativ (breiter) bewerten
-- Alle anderen fehlenden Felder → als `unbekannt` werten, kein Aufhalten
+Nach Eingang der Eingabe:
+- Fehlen FOKUS, ERWERB oder SCHWERE → nur diese drei nachfragen, dann direkt weiter
+- `?`-Felder → als „nicht beurteilbar" kennzeichnen, konservativ bewerten
+- Alle anderen leeren Felder → als `unbekannt` werten, kein Aufhalten
 
 ---
 
@@ -595,4 +615,5 @@ Niereninsuffizienz, Dialyse (post)
 ---
 
 *Quellen: Lokale Erregerstatistik 2025 [lokal] | PEG S2k-Leitlinie AWMF 082-006 [PEG]*
+
 
